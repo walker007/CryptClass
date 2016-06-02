@@ -4,7 +4,8 @@ private static $Texto;
 //Para Blowfish
 private static $Custo;
 private static $Salt;
-
+//Para Sha
+private static $Tipo;
 public static function getBlowFish(string $Texto, int $Custo = null, string $Salt = null){
  self::$Texto = $Texto;
  self::$Custo = ($Custo != null ? $Custo : 15);
@@ -24,7 +25,25 @@ self::$Texto = $Texto;
 $SID = self::geraSalt();
 self::$Salt = ($Salt != null ? $Salt : $SID);
 $HashMD5 = md5(self::$Texto . self::$Salt);
- return $Hash = ["md5" => $HasMD5, "Prefix" => $SID];
+ $Hash = ["md5" => $HasMD5, "Prefix" => $SID];
+return $Hash;
+
+}
+
+public static function getSha(string $Texto, int $Tipo){
+ self::$Texto = $Texto;
+ self::$Tipo = $Tipo;
+
+switch(self::$Tipo){
+case '1':
+return sha1(self::$Texto);
+
+break;
+
+default:
+echo "O tipo Solicitado não existe!";
+break;
+}
 }
 
 public static function getMd5Ultimate(string $Texto){
