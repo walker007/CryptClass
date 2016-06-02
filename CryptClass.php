@@ -27,6 +27,12 @@ $HashMD5 = md5(self::$Texto . self::$Salt);
  return $Hash = ["md5" => $HasMD5, "Prefix" => $SID];
 }
 
+public static function getMd5Ultimate(string $Texto){
+self::$Texto = $Texto;
+
+return md5(self::$Texto . md5(self::$Texto));
+}
+
 public static function geraSalt(){
 
         $id = uniqid(mt_rand(), true);
